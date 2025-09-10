@@ -1,0 +1,36 @@
+{% extends "election/base.html" %} {% block content %}
+<h2>LGA Results</h2>
+
+<form method="POST">
+	{% csrf_token %}
+	<label>Select LGA</label>
+	<select name="lga" class="form-select mb-3" id="lga-list" required></select>
+	<button type="submit" class="btn btn-success">Show Totals</button>
+</form>
+
+{% if totals %}
+<table class="table table-striped mt-3">
+	<tr>
+		<th>Party</th>
+		<th>Total Score</th>
+	</tr>
+	{% for t in totals %}
+	<tr>
+		<td>{{ t.party_abbreviation }}</td>
+		<td>{{ t.total_score }}</td>
+	</tr>
+	{% endfor %}
+</table>
+{% endif %}
+<a href="{% url 'home' %}" class="btn btn-secondary mt-4">← Back</a>
+
+<script>
+	$(function () {
+		$.getJSON("/api/lgas/25/", function (data) {
+			$("#lga-list").append(
+				data.map((l) => `<option value="${l.lga_id}">${l.lga_name}</option>`)
+			);
+		});
+	});
+</script>
+{% endblock %}

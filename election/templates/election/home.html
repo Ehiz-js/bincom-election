@@ -1,0 +1,59 @@
+{% extends "election/base.html" %} {% block content %}
+<div class="text-center mb-5">
+	<h2 class="fw-bold">Welcome to Bincom Election App</h2>
+	<p class="lead text-muted">
+		Navigate below to explore results and add new data
+	</p>
+</div>
+
+<div class="row g-4 align-items-stretch">
+	<!-- align-items-stretch ensures equal heights -->
+	<div class="col-md-4">
+		<div class="card h-100 shadow-sm">
+			<!-- h-100 makes card fill column height -->
+			<div class="card-body d-flex flex-column">
+				<!-- flex-column to stack and allow mt-auto -->
+				<h5 class="card-title">Polling Unit Results</h5>
+				<p class="card-text text-muted mb-4">
+					View detailed party scores for each polling unit.
+				</p>
+				<a
+					href="{% url 'polling_unit_results' %}"
+					class="btn btn-primary mt-auto"
+					>View Results</a
+				>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-md-4">
+		<div class="card h-100 shadow-sm">
+			<div class="card-body d-flex flex-column">
+				<h5 class="card-title">LGA Totals</h5>
+				<p class="card-text text-muted mb-4">
+					See aggregated results for an entire Local Government Area.
+				</p>
+				<a href="{% url 'lga_results' %}" class="btn btn-success mt-auto"
+					>View Totals</a
+				>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-md-4">
+		<div class="card h-100 shadow-sm">
+			<div class="card-body d-flex flex-column">
+				<h5 class="card-title">Add Results</h5>
+				<p class="card-text text-muted mb-4">
+					Enter new polling unit scores for all political parties.
+				</p>
+				<a
+					href="{% url 'add_polling_unit_results' %}"
+					class="btn btn-warning mt-auto"
+					>Add New</a
+				>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

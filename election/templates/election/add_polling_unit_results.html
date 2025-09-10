@@ -1,0 +1,60 @@
+{% extends "election/base.html" %} {% block content %}
+<h2>Add New Polling Unit Results</h2>
+
+<form method="POST">
+	{% csrf_token %}
+	<div class="mb-3">
+		<label>Polling Unit Name</label>
+		<input type="text" name="pu_name" class="form-control" />
+	</div>
+
+	<div class="row mb-3">
+		<div class="col">
+			<label>LGA</label>
+			<select name="lga_id" id="lga" class="form-select" required></select>
+		</div>
+		<div class="col">
+			<label>Ward</label>
+			<select name="ward_id" id="ward" class="form-select" required></select>
+		</div>
+	</div>
+
+	<h4>Enter Party Scores</h4>
+	{% for party in parties %}
+	<div class="mb-2">
+		<label>{{ party.partyid }}</label>
+		<input
+			type="number"
+			name="score_{{ party.partyid }}"
+			class="form-control"
+			min="0"
+		/>
+	</div>
+	{% endfor %}
+
+	<button type="submit" class="btn btn-primary mt-3">Save Results</button>
+</form>
+<a href="{% url 'home' %}" class="btn btn-secondary mt-4">← Back</a>
+
+<script>
+	$(function () {
+		$.getJSON("/api/lgas/25/", function (data) {
+			$("#lga").append(
+				data.map((l) => `<option value="${l.lga_id}">${l.lga_name}</option>`)
+			);
+		});
+
+		$("#lga").change(function () {
+			let lgaId = $(this).val();
+			$("#ward").empty();
+			$.getJSON(`/api/wards/${lgaId}/`, function (data) {
+				$("#ward").append(
+					data.map(
+						(w) => `<option value="${w.ward_id}">${w.ward_name}</option>`
+					)
+				);
+			});
+		});
+	});
+</script>
+{% endblock %}
