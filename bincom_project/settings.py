@@ -27,9 +27,9 @@ SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "unsafe-secret-key")
 DEBUG = os.environ.get("DJANGO_DEBUG", "") != "False"
 
 
-ALLOWED_HOSTS = ['bincom-election-production.up.railway.app/', '127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['bincom-election-production.up.railway.app', '127.0.0.1', 'localhost']
 
-CSRF_TRUSTED_ORIGINS = ['https://bincom-election-production.up.railway.app/']
+CSRF_TRUSTED_ORIGINS = ['https://bincom-election-production.up.railway.app']
 
 
 # Application definition
