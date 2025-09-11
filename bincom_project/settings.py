@@ -78,12 +78,16 @@ WSGI_APPLICATION = 'bincom_project.wsgi.application'
 
 
 DATABASES = {
-    "default": dj_database_url.config(
-        default=f"sqlite:///{BASE_DIR}/db.sqlite3",  # fallback for local dev
-        conn_max_age=600,
-        ssl_require=False,
-    )
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'railway',
+        'USER': 'root',
+        'PASSWORD': 'wUJVGlgVuFIaTKTLwHEQNxAjVcPBSBkk',
+        'HOST': 'shortline.proxy.rlwy.net',
+        'PORT': '46143',
+    }
 }
+
 
 
 # Password validation
@@ -127,3 +131,4 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
